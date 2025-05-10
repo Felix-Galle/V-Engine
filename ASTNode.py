@@ -1,6 +1,4 @@
 
-import tkinter as tk
-from collections import defaultdict
 
 class ASTNode:
     pass

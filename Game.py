@@ -1,9 +1,6 @@
 import os
 import tkinter as tk
-from collections import defaultdict
-import vengine
-from Lexer import Lexer
-from Parser import Parser
+import param
 from EntityDef import EntityDef
 from EntityInst import EntityInst
 from ASTNode import Scene, Entity, Statement
@@ -23,7 +20,7 @@ class Game:
         for stmt in scene.statements:
             if isinstance(stmt, Statement) and stmt.cmd == 'background_color':
                 color = stmt.args[0]
-                self.canvas = tk.Canvas(self.root, width=vengine.CANVAS_WIDTH, height=vengine.CANVAS_HEIGHT, bg=color)
+                self.canvas = tk.Canvas(self.root, width=param.CANVAS_WIDTH, height=param.CANVAS_HEIGHT, bg=color)
                 self.canvas.pack()
                 break
             if isinstance(stmt, Statement) and stmt.cmd == 'background':
@@ -37,7 +34,7 @@ class Game:
                     break
                 else:
                     # treat as solid color name
-                    self.canvas = tk.Canvas(self.root, width= vengine.CANVAS_WIDTH, height=vengine.CANVAS_HEIGHT, bg=path)
+                    self.canvas = tk.Canvas(self.root, width= param.CANVAS_WIDTH, height=param.CANVAS_HEIGHT, bg=path)
                     self.canvas.pack()
                     break
         # preload images

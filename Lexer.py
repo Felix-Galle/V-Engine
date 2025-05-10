@@ -1,7 +1,6 @@
-import tkinter as tk
-from collections import defaultdict
 from Token import Token
-import vengine
+import param
+
 
 class Lexer:
     def __init__(self, text):
@@ -17,7 +16,7 @@ class Lexer:
             while indent < indent_stack[-1]:
                 self.tokens.append(Token('DEDENT', ''))
                 indent_stack.pop()
-            for m in vengine.TOK_REGEX.finditer(line):
+            for m in param.TOK_REGEX.finditer(line):
                 typ = m.lastgroup
                 val = m.group()
                 if typ == 'SKIP':

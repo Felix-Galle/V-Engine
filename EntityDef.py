@@ -1,8 +1,3 @@
-import sys
-import os
-import re
-import time
-import tkinter as tk
 from collections import defaultdict
 
 class EntityDef:

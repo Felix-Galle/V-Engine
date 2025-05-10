@@ -1,9 +1,4 @@
-import sys
-import os
-import re
-import time
-import tkinter as tk
-from collections import defaultdict
+
 
 class EntityInst:
     def __init__(self, edef, canvas, images):

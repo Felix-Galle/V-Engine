@@ -1,5 +1,4 @@
-import tkinter as tk
-from collections import defaultdict
+
 
 class Token:
     def __init__(self, typ, val):

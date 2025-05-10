@@ -1,5 +1,4 @@
-import tkinter as tk
-from collections import defaultdict
+
 from ASTNode import Scene, Entity, Statement
 
 class Parser:
