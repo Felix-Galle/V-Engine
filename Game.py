@@ -1,9 +1,9 @@
 import os
 import tkinter as tk
 import param
-from EntityDef import EntityDef
-from EntityInst import EntityInst
-from ASTNode import Scene, Entity, Statement
+from entity_def import EntityDef
+from entity_inst import EntityInst
+from ast_node import Scene, Entity, Statement
 
 
 class Game:

@@ -11,9 +11,9 @@ Features:
 """
 
 import sys
-from Lexer import Lexer
-from Parser import Parser
-from Game import Game
+from lexer import Lexer
+from parser import Parser
+from game import Game
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
