@@ -24,5 +24,9 @@ To run this program you __MUST__ be in windows (I've not tried any other OS)
 1. Open Terminal (Powershell or CMD)
 2. type: python3 vengine.py "scriptname"
 
+### Script syntax
+
+The script must be named as such: "script.v"
+
 ### Program File Arguements
 
