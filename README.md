@@ -29,4 +29,4 @@ To run this program you __MUST__ be in windows (I've not tried any other OS)
 The script must be named as such: "script.v"
 
 ### Program File Arguements
-
+ script.v

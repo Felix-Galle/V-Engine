@@ -1,5 +1,5 @@
 
-from ASTNode import Scene, Entity, Statement
+from ast_node import Scene, Entity, Statement
 
 class Parser:
     def __init__(self, lexer):
