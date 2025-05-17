@@ -10,6 +10,8 @@ Please remember that when you Commit and Push/Sync to github, please include the
 
 > ## - 17.05.2025 -
 >
+> __By:__ Felix-Galle
+>
 > - Added [CHANGES.md](https://github.com/Felix-Galle/V-Engine/CHANGES.md):
 > This file is/will be used to comprehensively show the changes made by collaborators.
 >
