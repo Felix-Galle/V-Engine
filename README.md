@@ -2,7 +2,7 @@
 
 ## A robust DSL interpreter for V-language game scripts
 
-To view changelog of features and things, [click here](https://github.com/Felix-Galle/V-Engine/CHANGES.md).
+To view changelog of features and things, [click here](https://github.com/Felix-Galle/V-Engine/main/CHANGES.md).
 
 ### Features
 
