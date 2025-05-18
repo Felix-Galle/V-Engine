@@ -33,6 +33,8 @@ class Game:
         for stmt in scene.statements:
             if isinstance(stmt, Statement) and stmt.cmd == 'background_color':
                 # Set background color
+                # HOW THE HECK IS THE COLOR SET? 
+                # Its NOT 
                 color = stmt.args[0]
                 self.canvas = tk.Canvas(self.root, width=width, height=height, bg=color)
                 self.canvas.pack()
