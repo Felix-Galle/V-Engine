@@ -19,3 +19,30 @@ Please remember that when you Commit and Push/Sync to github, please include the
 > This file is a version of this project's code all in one file/module.
 > Be aware that the latest version of full_code.py may not be the latest version of the rest of the project.
 >
+
+> ## - 18.05.2025 -
+>
+> __By:__ Felix-Galle
+>
+> - Added a triangle.
+>
+>~~~python
+>   entity thing:
+>       position 0 0
+>       shape triangle "50,50" green
+>~~~
+>
+> - Added win settings, they must be at the top of the file.
+>
+>~~~python
+>win:
+>   title "Example_Title"
+>   dimensions 200 200
+>~~~
+>
+> - Added Comments
+> Any code right of the declaration is ignored, until the nextline.
+>
+>~~~python
+>   title "Example Title & code" # This section isn't executed
+>~~~

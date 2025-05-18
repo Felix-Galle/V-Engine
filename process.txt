@@ -1,0 +1,5 @@
+This file is just for my thought processes.
+
+(ln 12) gets the script (script.v) and it then reads the script.
+
+Lexers it via text

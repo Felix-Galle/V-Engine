@@ -3,6 +3,10 @@
 class ASTNode:
     pass
 
+class Win(ASTNode):
+    def __init__(self, statements):
+        self.statements = statements
+
 class Scene(ASTNode):
     def __init__(self, name, statements):
         self.name = name

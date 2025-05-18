@@ -1,8 +1,6 @@
 import re
 
-# Canvas defaults for solid-colour backgrounds
-CANVAS_WIDTH = 800
-CANVAS_HEIGHT = 600
+debug = False
 
 TOKEN_SPECS = [
     ('NUMBER',   r"\d+(?:\.\d+)?"),
@@ -12,5 +10,6 @@ TOKEN_SPECS = [
     ('SKIP',     r"[ \t]+"),
     ('OP',       r"[=+\-*/%(),]"),
     ('COLON',    r":"),
+    ('COMMENT',  r"#.*"),
 ]
 TOK_REGEX = re.compile('|'.join(f"(?P<{name}>{pattern})" for name, pattern in TOKEN_SPECS))

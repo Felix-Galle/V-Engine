@@ -1,7 +1,9 @@
-
+import logging
 
 class EntityInst:
     def __init__(self, edef, canvas, images):
+        logging.debug("Using EntityInst constructor")
+        logging.debug(f"Creating EntityInst with edef: {edef}, canvas: {canvas}, images: {images}")
         self.defn = edef
         self.canvas = canvas
         pos = edef.props.get('position', ['0', '0'])
@@ -21,6 +23,8 @@ class EntityInst:
                 self.id = canvas.create_rectangle(self.x, self.y, self.x + w, self.y + h, fill=color)
             elif typ == 'oval':
                 self.id = canvas.create_oval(self.x, self.y, self.x + w, self.y + h, fill=color)
+            elif typ == 'triangle':
+                self.id = canvas.create_polygon(self.x, self.y, self.x + w, self.y + h, fill=color)
         elif 'image' in edef.props:
             imgf = edef.props['image'][0]
             if imgf in images:
