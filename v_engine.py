@@ -15,8 +15,8 @@ if __name__ == '__main__':
     logging.basicConfig(filename=log_file, level=logging.DEBUG, 
                         format='%(asctime)s - %(levelname)s - %(message)s')
 
-    sys.argv = ['vengine.py', 'script.v', '--debug'] # TODO: Remove this line (For normal usage)
-    """if len(sys.argv) < 2: # TODO: Uncomment this block (For normal usage)
+    sys.argv = ['vengine.py', 'script.v', '--debug'] # TODO: Remove this line & Uncomment this block (For normal usage)
+    """if len(sys.argv) < 2:
         print("Usage: vengine.py <script.v>")
         sys.exit(1)"""
 
