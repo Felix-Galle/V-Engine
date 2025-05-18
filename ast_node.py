@@ -4,7 +4,9 @@ class ASTNode:
     pass
 
 class Win(ASTNode):
-    def __init__(self, statements):
+    def __init__(self, title, dimensions, statements):
+        self.title = title
+        self.dimensions = dimensions
         self.statements = statements
 
 class Scene(ASTNode):

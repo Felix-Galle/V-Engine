@@ -6,9 +6,11 @@ All notable changes to this project will be documented in this file.
 
 Please remember that when you Commit and Push/Sync to github, please include the changes you've made to this file.
 
+> To suggest more features, go to [issues](https://github.com/Felix-Galle/V-Engine/isses)
+
 ## Changes
 
-> ## - 17.05.2025 -
+> ## 17.05.2025
 >
 > __By:__ Felix-Galle
 >
@@ -20,7 +22,7 @@ Please remember that when you Commit and Push/Sync to github, please include the
 > Be aware that the latest version of full_code.py may not be the latest version of the rest of the project.
 >
 
-> ## - 18.05.2025 -
+> ## 18.05.2025 - (01)
 >
 > __By:__ Felix-Galle
 >
@@ -32,6 +34,17 @@ Please remember that when you Commit and Push/Sync to github, please include the
 >       shape triangle "50,50" green
 >~~~
 >
+> - Added Comments
+> Any code right of the declaration is ignored, until the nextline.
+>
+>~~~python
+>   title "Example Title & code" # This section isn't executed
+>~~~
+
+> ## 18.05.2025 - (02)
+>
+> __By:__ Felix-Galle
+>
 > - Added win settings, they must be at the top of the file.
 >
 >~~~python
@@ -40,9 +53,17 @@ Please remember that when you Commit and Push/Sync to github, please include the
 >   dimensions 200 200
 >~~~
 >
-> - Added Comments
-> Any code right of the declaration is ignored, until the nextline.
+> ### Bugs
 >
->~~~python
->   title "Example Title & code" # This section isn't executed
->~~~
+> - "KeyPress" don't work.
+> - Polygon Triangle doesn't show up on scene
+>
+> ### Planned Features
+>
+> - More application arguements e.g.
+>   - Toggleable Debug Mode: --debug or --verbose
+> - More polygons
+> - compatibility with hex color codes
+> - More control of logging (perhaps through application arguements).
+>
+>

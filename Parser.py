@@ -10,18 +10,19 @@ class Parser:
 
     def parse(self):
         logging.debug("Parsing the script")
+        win = None
         scenes = []
         while self.lex.peek().type != 'EOF':
             if self.lex.peek().type == 'COMMENT':
                 self.skip_comment()
             else:
                 if self.lex.peek().value == 'win':
-                    scenes.append(self.parse_win())
+                    win = (self.parse_win())
                 elif self.lex.peek().value == 'scene':
                     scenes.append(self.parse_scene())
                 else:
                     raise SyntaxError(f"Unexpected token {self.lex.peek().value}, expected 'win' or 'scene'")
-        return scenes
+        return win, scenes
 
     def skip_comment(self):
         logging.debug("Skipping comment")
@@ -46,20 +47,27 @@ class Parser:
         dimensions = None
         while self.lex.peek().type != 'DEDENT':
             tok = self.lex.peek()
+            logging.debug(f"Current token: {tok}")
             if tok.type == 'COMMENT':
                 self.skip_comment()
             elif tok.type == 'ID' and tok.value == 'title':
                 self.lex.expect('ID', 'title')
                 title = self.lex.expect('STRING').value
+                logging.debug(f"Parsed title: {title}")
             elif tok.type == 'ID' and tok.value == 'dimensions':
                 self.lex.expect('ID', 'dimensions')
                 width = self.lex.expect('NUMBER').value
                 height = self.lex.expect('NUMBER').value
                 dimensions = (int(width), int(height))
-            else:
+                logging.debug(f"Parsed dimensions: {dimensions}")
+            elif tok.type != 'NEWLINE':
                 stmts.append(self.parse_statement())
+            else:
+                self.lex.next()  # Consume the NEWLINE token
         self.lex.expect('DEDENT')
+        logging.debug(f"Finished parsing window with title: {title} and dimensions: {dimensions}")
         return Win(title, dimensions, stmts)
+
 
     def parse_scene(self):
         logging.debug("Parsing scene definition")
@@ -89,7 +97,7 @@ class Parser:
 
     def parse_entity(self):
         logging.debug("Parsing entity definition")
-        self.lex.expect('ID', 'entity')
+        self.lex.expect('ID', 'entity') # Expects entity + name of entity
         name = self.lex.expect('ID').value
         self.lex.expect('COLON')
         stmts = []

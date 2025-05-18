@@ -9,10 +9,12 @@ from ast_node import Win, Scene, Entity, Statement
 
 # Game class: Manages scenes, entities, and the game loop
 class Game:
-    def __init__(self, scenes):
+    def __init__(self, win, scenes):
         logging.debug("Using Game constructor")
+        logging.debug(f"Creating Game with window: {win}")
         logging.debug(f"Creating Game with scenes: {scenes}")
         # Initialize the game with a dictionary of scenes
+        self.win = win  # Window definition (title and dimensions)
         self.scenes = {s.name: s for s in scenes}
         self.root = tk.Tk()  # Create the main Tkinter window
         self.canvas = None  # Canvas for rendering the game
@@ -20,6 +22,10 @@ class Game:
         self.entities = []  # List of entity instances in the current scene
 
     def setup_scene(self, name):
+        # Set up the game window with the specified title and dimensions
+        self.root.title(self.win.title)
+        width, height = self.win.dimensions
+        self.root.geometry(f"{width}x{height}") # TODO: Remove, I can't find a use.
         # Set up the specified scene by name
         scene = self.scenes[name]
 
@@ -28,7 +34,7 @@ class Game:
             if isinstance(stmt, Statement) and stmt.cmd == 'background_color':
                 # Set background color
                 color = stmt.args[0]
-                self.canvas = tk.Canvas(self.root, width=scene.width, height=scene.width, bg=color)
+                self.canvas = tk.Canvas(self.root, width=width, height=height, bg=color)
                 self.canvas.pack()
                 break
             if isinstance(stmt, Statement) and stmt.cmd == 'background':

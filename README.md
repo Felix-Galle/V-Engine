@@ -28,12 +28,17 @@ To view changelog of features and things, [click here](https://github.com/Felix-
 To run this program you ought to be using windows (I've not tried any other OS)
 
 1. Open Terminal (Powershell or CMD)
-2. type: python3 vengine.py "scriptname"
+2. type: python3 v_engine.py "scriptname"
+e.g. script.v
 
-### Script syntax
-
-The script must be named as such: "script.v"
-
-### Program File Arguements
-
-script.v
+> Currently v_engine.py ignores any given arguements:
+>
+>~~~python
+>    sys.argv = ['vengine.py', 'script.v', '--debug'] # TODO: Remove this line (for normal usage)
+>    """if len(sys.argv) < 2: # TODO: Uncomment this block (For normal usage)
+>        print("Usage: vengine.py <script.v>")
+>        sys.exit(1)"""
+>~~~
+>
+> - To run the file normally, follow the TODO comment(s)
+> ie. Uncomment that block & remove the sys.argv = ...
