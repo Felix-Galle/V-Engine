@@ -48,7 +48,7 @@ class Parser:
         while self.lex.peek().type != 'DEDENT':
             tok = self.lex.peek()
             logging.debug(f"Current token: {tok}")
-            if tok.type == 'COMMENT':
+            if tok.type == 'COMMENT': # Skip comments
                 self.skip_comment()
             elif tok.type == 'ID' and tok.value == 'title':
                 self.lex.expect('ID', 'title')
@@ -70,10 +70,14 @@ class Parser:
 
 
     def parse_scene(self):
+        """
+        scene "name01":
+            # blah
+        """
         logging.debug("Parsing scene definition")
         
         self.lex.expect('ID', 'scene')
-        name = self.lex.expect('ID').value
+        name = self.lex.expect('STRING').value
         self.lex.expect('COLON')
         stmts = self.parse_block()
         return Scene(name, stmts)

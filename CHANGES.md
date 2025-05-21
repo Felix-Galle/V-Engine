@@ -22,9 +22,11 @@ Please remember that when you Commit and Push/Sync to github, please include the
 > Be aware that the latest version of full_code.py may not be the latest version of the rest of the project.
 >
 
-> ## 18.05.2025 - (01)
+> ## 18.05.2025
 >
 > __By:__ Felix-Galle
+>
+> ### Updates
 >
 > - Added a triangle.
 >
@@ -34,18 +36,13 @@ Please remember that when you Commit and Push/Sync to github, please include the
 >       shape triangle "50,50" green
 >~~~
 >
-> - Added Comments
-> Any code right of the declaration is ignored, until the nextline.
+> - Added Comments: Any code right of the declaration is ignored, until the next line.
 >
 >~~~python
 >   title "Example Title & code" # This section isn't executed
 >~~~
-
-> ## 18.05.2025 - (02)
 >
-> __By:__ Felix-Galle
->
-> - Added win settings, they must be at the top of the file.
+> - Added win settings, which must be at the top of the file.
 >
 >~~~python
 >win:
@@ -55,15 +52,13 @@ Please remember that when you Commit and Push/Sync to github, please include the
 >
 > ### Bugs
 >
-> - "KeyPress" don't work.
-> - Polygon Triangle doesn't show up on scene
+> - "KeyPress" doesn't work.
+> - Polygon Triangle doesn't show up on the scene.
 >
 > ### Planned Features
 >
-> - More application arguements e.g.
+> - More application arguments, e.g.:
 >   - Toggleable Debug Mode: --debug or --verbose
-> - More polygons
-> - compatibility with hex color codes
-> - More control of logging (perhaps through application arguements).
->
->
+> - More polygons.
+> - Compatibility with hex color codes.
+> - More control of logging (perhaps through application arguments).
