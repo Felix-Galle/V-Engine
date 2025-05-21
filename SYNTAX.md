@@ -1,5 +1,7 @@
 # Syntax Dictionary for `script.v`
 
+Variable names of your choosing are shown as `<name>`, however if a data type is mandated they are shown as `"<name>"`.
+
 ## Window Structure
 
 - `win:`: Defines the window properties.

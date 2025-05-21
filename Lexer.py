@@ -7,7 +7,7 @@ import param
 class Lexer:
     def __init__(self, text):
         logging.debug("Using Lexer constructor")
-        logging.debug(f"Creating Lexer with text: {text}")
+        logging.debug(f"Creating Lexer with text: \n{text}")
         """
         Initialize the Lexer with the given text and tokenize it.
 
@@ -61,7 +61,7 @@ class Lexer:
         self.pos = 0  # Initialize the position pointer for token traversal
 
     def peek(self):
-        logging.debug("Peeking at the current token")
+        logging.debug(f"cur tok pos:{self.pos}:{self.tokens[self.pos].type},{self.tokens[self.pos].value}")
         """
         Peek at the current token without advancing the position.
 
@@ -71,7 +71,7 @@ class Lexer:
         return self.tokens[self.pos]
 
     def next(self):
-        logging.debug("Getting the next token")
+        logging.debug(f"Nxt tok (to{self.pos+1}): {self.tokens[self.pos+1].type}, {self.tokens[self.pos+1].value}")
         """
         Get the current token and advance the position.
 
@@ -83,7 +83,7 @@ class Lexer:
         return tok
 
     def expect(self, typ, val=None):
-        logging.debug(f"Expecting token type: {typ}, value: {val}")
+        logging.debug(f"Expecting tok typ: {typ}, val: {val}")
         """
         Consume the next token and ensure it matches the expected type and value.
 
