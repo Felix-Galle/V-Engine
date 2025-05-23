@@ -1,6 +1,29 @@
 # Syntax Dictionary for `script.v`
 
-Variable names of your choosing are shown as `<name>`, however if a data type is mandated they are shown as `"<name>"`.
+---
+
+## Command Line Arguments
+
+The `vengine.py` script can be executed from the command line with the following options:
+
+- `<script.v>`: The main script file that defines the structure, scenes, entities, and events for the V-Engine. This file must follow the syntax rules outlined in this document.
+
+- `--help`: Displays a help message explaining the usage of the script and its available options.
+
+- `--open`: Opens the specified `<script.v>` file in Notepad for editing.
+
+- `--debug`: Enables debug mode, showing a lot more detail inthe logs:
+
+---
+
+### Notes
+
+>Variable names of your choosing are shown as `<name>`, however if a stringtype is mandated they are shown as `"<name>"`.
+Integers/floats aren't effected e.g. `<number>`.
+
+---
+
+## Script Syntax
 
 ## Window Structure
 
