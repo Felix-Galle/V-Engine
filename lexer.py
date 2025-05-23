@@ -24,12 +24,12 @@ class Lexer:
 
             # Calculate the current line's indentation level
             indent = len(line) - len(line.lstrip(' '))
-            
+
             # Handle increased indentation (INDENT token)
             if indent > indent_stack[-1]:
                 self.tokens.append(Token('INDENT', ''))
                 indent_stack.append(indent)
-            
+
             # Handle decreased indentation (DEDENT token)
             while indent < indent_stack[-1]:
                 self.tokens.append(Token('DEDENT', ''))
@@ -44,10 +44,10 @@ class Lexer:
                     continue
                 if typ == 'STRING':  # Remove quotes from string tokens
                     val = val[1:-1]
-                
+
                 # Append the token to the list
                 self.tokens.append(Token(typ, val))
-            
+
             # Add a NEWLINE token at the end of each line
             self.tokens.append(Token('NEWLINE', ''))
 
@@ -59,6 +59,7 @@ class Lexer:
         # Add an EOF (End of File) token to signify the end of the input
         self.tokens.append(Token('EOF', ''))
         self.pos = 0  # Initialize the position pointer for token traversal
+
 
         logging.debug("Lexer tokens:")
         i = 0

@@ -23,6 +23,7 @@ if __name__ == '__main__':
     log_dir = './logs'
     os.makedirs(log_dir, exist_ok=True)
     log_file = os.path.join(log_dir, f'vengine-{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.log')
+    log_file = os.path.join(log_dir, f'vengine.log')
     logging.basicConfig(filename=log_file, level=logging.INFO, format='[%(name)s/%(levelname)s] %(asctime)s > %(message)s')
 
     logging.info("V-Engine starting...")

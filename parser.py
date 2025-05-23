@@ -4,7 +4,7 @@ from ast_node import Win, Scene, Entity, Statement
 
 class Parser:
     def __init__(self, lexer):
-        logging.debug(f"Using Lexer: {lexer}")
+        logging.debug(f"Using Lexer: {lexer}") # TODO: Remove, there is no use to knowing the lexer memory address
         logging.info(f"Parsing...")
         self.lex = lexer
 
@@ -22,7 +22,7 @@ class Parser:
                     logging.info("Found win settings declaration !")
                     win = (self.parse_win())
                 elif self.lex.peek().value == 'scene':
-                    logging.info("Found scne declaration !")
+                    logging.info("Found scene declaration !")
                     scenes.append(self.parse_scene())
                 else:
                     raise SyntaxError(f"Unexpected token {self.lex.peek().value}, expected 'win' or 'scene'")
