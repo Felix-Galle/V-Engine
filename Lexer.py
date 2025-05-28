@@ -6,8 +6,8 @@ import param
 
 class Lexer:
     def __init__(self, text):
-        logging.debug("Using Lexer constructor")
-        logging.debug(f"Creating Lexer with text: \n{text}")
+        logging.debug(f"Contents:\n{text}")
+        logging.info("Tokenizing...")
         """
         Initialize the Lexer with the given text and tokenize it.
 
@@ -60,8 +60,16 @@ class Lexer:
         self.tokens.append(Token('EOF', ''))
         self.pos = 0  # Initialize the position pointer for token traversal
 
+
+        logging.debug("Lexer tokens:")
+        i = 0
+        for token in self.tokens:
+            logging.debug(f"tok{i}: {token.type}, {token.value}")
+            i+= 1
+        logging.info("Tokenizing complete !")
+
     def peek(self):
-        logging.debug(f"cur tok pos:{self.pos}:{self.tokens[self.pos].type},{self.tokens[self.pos].value}")
+        logging.debug(f"cur tok{self.pos}:{self.tokens[self.pos].type},{self.tokens[self.pos].value}")
         """
         Peek at the current token without advancing the position.
 
@@ -71,7 +79,7 @@ class Lexer:
         return self.tokens[self.pos]
 
     def next(self):
-        logging.debug(f"Nxt tok (to{self.pos+1}): {self.tokens[self.pos+1].type}, {self.tokens[self.pos+1].value}")
+        logging.debug(f"Nxt tok (to tok{self.pos+1}): {self.tokens[self.pos+1].type}, {self.tokens[self.pos+1].value}")
         """
         Get the current token and advance the position.
 

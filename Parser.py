@@ -4,38 +4,39 @@ from ast_node import Win, Scene, Entity, Statement
 
 class Parser:
     def __init__(self, lexer):
-        logging.debug("Using Parser constructor")
-        logging.debug(f"Creating Parser with lexer: {lexer}")
+        logging.debug(f"Using Lexer: {lexer}") # TODO: Remove, there is no use to knowing the lexer memory address
+        logging.info(f"Parsing...")
         self.lex = lexer
 
     def parse(self):
-        logging.debug("Parsing the script")
+        logging.debug("parse.Parse.parse()")
         win = None
         scenes = []
+        
         while self.lex.peek().type != 'EOF':
             if self.lex.peek().type == 'COMMENT':
                 logging.debug("Urgh... comments >:(")
                 self.skip_comment()
             else:
                 if self.lex.peek().value == 'win':
-                    logging.info("Found win def")
+                    logging.info("Found win settings declaration !")
                     win = (self.parse_win())
                 elif self.lex.peek().value == 'scene':
-                    logging.info("Found scn def")
+                    logging.info("Found scene declaration !")
                     scenes.append(self.parse_scene())
                 else:
                     raise SyntaxError(f"Unexpected token {self.lex.peek().value}, expected 'win' or 'scene'")
         return win, scenes
 
     def skip_comment(self):
-        logging.debug("Skipping comment")
+        logging.debug("parse.Parse.skip_comment()")
         while self.lex.peek().type != 'NEWLINE' and self.lex.peek().type != 'EOF':
             self.lex.next()
         if self.lex.peek().type == 'NEWLINE':
             self.lex.next()
 
     def parse_win(self):
-        logging.debug("Parsing win def")
+        logging.debug("parse.Parse.parse_win()")
         """
         win:
             title "My Game"
@@ -72,11 +73,11 @@ class Parser:
 
 
     def parse_scene(self):
+        logging.debug("parse.Parse.parse_scene()")
         """
         scene "name01":
             # blah
         """
-        logging.debug("Parsing scn def")
 
         self.lex.expect('ID', 'scene') # wants ID and it's ID being scene
         # NO NEED TO ADVANCE TEH BLOODY TOKEN, the lexer .expect() does it already
@@ -86,6 +87,7 @@ class Parser:
         return Scene(name, stmts)
 
     def parse_block(self):
+        logging.debug("parse.Parse.parse_block()")
         logging.debug("Parsing blk of statements")
 
         statements = []
