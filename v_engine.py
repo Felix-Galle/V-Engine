@@ -5,9 +5,9 @@ import logging
 import datetime
 import os
 import platform
-from lexer import Lexer
-from parser import Parser
-from game import Game
+from tokenizer import Lexer
+from compiler import Parser
+from thing import Game # Renamed to thing cuz or capitalization issues
 
 """
 V-Engine
@@ -22,7 +22,7 @@ if __name__ == '__main__':
     #Setting up logging
     log_dir = './logs'
     os.makedirs(log_dir, exist_ok=True)
-    log_file = os.path.join(log_dir, f'vengine-{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.log')
+    # log_file = os.path.join(log_dir, f'vengine-{datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.log')
     log_file = os.path.join(log_dir, f'vengine.log')
     logging.basicConfig(filename=log_file, level=logging.INFO, format='[%(name)s/%(levelname)s] %(asctime)s > %(message)s')
 
@@ -47,6 +47,7 @@ if __name__ == '__main__':
             print("  --open       Open the script file in Notepad")
             print("  --debug      Enable debug mode")
             sys.exit(0)
+            # TODO: Remove, Doesn't work, yet
         if arg == '--open':
             os.system("notepad.exe " + script_file)
         if arg == '--debug':
@@ -59,7 +60,8 @@ if __name__ == '__main__':
 
     
     
-    logging.info("Created by: %s", "Felix-Galle & thatfacelessone")
+    logging.info("Created by: %s", "thatfacelessone & Felix-Galle")
+    logging.info("Python executable: %s", sys.executable)
     logging.info("Python version: %s", sys.winver)
     logging.info(f"Operating system: {platform.system()}")
     logging.info("Current working directory: %s", os.getcwd())
