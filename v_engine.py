@@ -5,9 +5,9 @@ import logging
 import datetime
 import os
 import platform
-from tokenizer import Lexer
-from compiler import Parser
-from thing import Game # Renamed to thing cuz or capitalization issues
+from lexer import Lexer
+from parser import Parser
+from game import Game
 
 """
 V-Engine
