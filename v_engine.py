@@ -29,7 +29,7 @@ if __name__ == '__main__':
     logging.info("V-Engine starting...")
 
     # Requires v_engine.py + script.v
-    logging.debug("Checking args...")
+    logging.info("Checking args...")
     if len(sys.argv) < 2:
         print("Usage: vengine.py <script.v>")
         sys.exit(1)
