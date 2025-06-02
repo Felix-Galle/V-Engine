@@ -28,15 +28,15 @@ Integers/floats aren't effected e.g. `<number>`.
 ## Window Structure
 
 - `win:`: Defines the window properties.
-**Must** have a colon `:` before the nextline
+**Must** have a colon `:` before the nextline.
 Items **must** be indented!
 
 - `title "<title>"` - Sets the title of the window.
-Title **must** be surrounded by quotes `""`
+Title **must** be surrounded by quotes `""`.
 Example: `title "script.v"`
 
 - `dimensions <width> <height>` - Sets the width and height of the window.
-Dimensions **must** be full numbers (cuz obvious; u cannot have half a pixel of size)
+Dimensions **must** be full numbers (cuz obvious; u cannot have half a pixel of size).
 Example: `dimensions 400 300`
 
 ```python
