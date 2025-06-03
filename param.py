@@ -3,15 +3,18 @@ import re
 # List of token specifications for a lexer
 # Each tuple contains a token name and its corresponding regex pattern
 TOKEN_SPECS = [
-    ('VAR',      r"var"),                # Matches the 'var' keyword
-    ('NUMBER',   r"\d+(?:\.\d+)?"),      # Matches integers or floating-point numbers
-    ('STRING',   r'"[^"\n]*"'),          # Matches double-quoted strings
-    ('ID',       r"[A-Za-z_][A-Za-z0-9_]*"),  # Matches identifiers (letters, digits, and underscores, starting with a letter or underscore)
-    ('NEWLINE',  r"\n"),                 # Matches newline characters
-    ('SKIP',     r"[ \t]+"),             # Matches spaces and tabs (to be skipped)
-    ('OP',       r"[=+\-*/%(),]"),       # Matches operators and punctuation
-    ('COLON',    r":"),                  # Matches a colon character
-    ('COMMENT',  r"//.*"),               # Matches comments starting with //
+    ('VAR',      r"var"),                # Matches the 'var' keyword (e.g., var)
+    ('NUMBER',   r"\d+(?:\.\d+)?"),      # Matches integers or floating-point numbers (e.g., 42, 3.14)
+    ('STRING',   r'"[^"\n]*"'),          # Matches double-quoted strings (e.g., "hello")
+    ('ID',       r"[A-Za-z_][A-Za-z0-9_]*"),  # Matches identifiers (e.g., my_var, _temp123)
+    ('NEWLINE',  r"\n"),                 # Matches newline characters (e.g., \n)
+    ('SKIP',     r"[ \t]+"),             # Matches spaces and tabs (e.g., [space], [tab])
+    ('OP',       r"[=+\-*/%(),]"),       # Matches operators and punctuation (e.g., =, +, -, *, /, %, (, ))
+    ('COLON',    r":"),                  # Matches a colon character (e.g., :)
+
+    ('LOGIC',    r"(?:&&|\|\||!|\^)"),   # Matches logical operators including XOR (e.g., &&, ||, !, ^)
+    ('ARITH',    r"[+\-*/%]"),           # Matches arithmetic operators (e.g., +, -, *, /, %)
+    ('COMPARE',  r"(?:==|!=|<=|>=|<|>)"), # Matches comparison operators (e.g., ==, !=, <=, >=, <, >)
 ]
 
 # Compile the token specifications into a single regex pattern

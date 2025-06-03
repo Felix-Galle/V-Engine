@@ -1,5 +1,7 @@
 // This is a test comment
 
+var "a" = 1
+
 win:
     title "script.v"
     dimensions 400 300
@@ -7,9 +9,6 @@ win:
 scene "start":
 
     background_color blue
-
-    on key_space:
-        change_scene "test"
 
     //entity "thing":
     //    position 0 0

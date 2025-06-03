@@ -1,6 +1,6 @@
 import logging
 
-from custom_token import Token
+from custom_token import Token , VariableToken
 import param
 
 
@@ -15,6 +15,7 @@ class Lexer:
             text (str): The input text to tokenize.
         """
         self.tokens = []  # List to store the generated tokens
+        self.vars = {}  # Dictionary to store variable names and their values
         indent_stack = [0]  # Stack to track indentation levels
 
         # Process each line of the input text
@@ -45,9 +46,39 @@ class Lexer:
                 if typ == 'STRING':  # Remove quotes from string tokens
                     val = val[1:-1]
                 
+                '''
+                # Handle variable declaration
+                if typ == 'VAR':
+                    # Expect an identifier (variable name) after 'var'
+                    var_name_match = param.TOK_REGEX.match(line, m.end())
+                    if var_name_match and var_name_match.lastgroup == 'ID':
+                        var_name = var_name_match.group()
+                        # Check for '=' after the variable name
+                        eq_match = param.TOK_REGEX.match(line, var_name_match.end())
+                        if eq_match and eq_match.lastgroup == 'OP' and eq_match.group() == '=':
+                            # Get the value assigned to the variable
+                            value_match = param.TOK_REGEX.match(line, eq_match.end())
+                            if value_match:
+                                value_type = value_match.lastgroup
+                                value = value_match.group()
+                                if value_type == 'NUMBER':
+                                    value = float(value) if '.' in value else int(value)
+                                elif value_type == 'STRING':
+                                    value = value[1:-1]  # Remove quotes
+                                else:
+                                    raise SyntaxError(f"Invalid value for variable: {value}")
+                                self.tokens.append(VariableToken(var_name, value))
+                                continue
+                            else:
+                                raise SyntaxError("Expected value after '=' in variable declaration")
+                        else:
+                            raise SyntaxError("Expected '=' after variable name in variable declaration")
+                    else:
+                        raise SyntaxError("Expected variable name after 'var'")'''
+
                 # Append the token to the list
                 self.tokens.append(Token(typ, val))
-            
+
             # Add a NEWLINE token at the end of each line
             self.tokens.append(Token('NEWLINE', ''))
 

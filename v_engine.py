@@ -44,7 +44,7 @@ if __name__ == '__main__':
             print("Usage: vengine.py <script.v>")
             print("Options:")
             print("  --help       Show this help message and exit")
-            print("  --open       Open the script file in Notepad")
+            print("  --open       Open the script file in Notepad (nonoperational, yet)")
             print("  --debug      Enable debug mode")
             sys.exit(0)
             # TODO: Remove, Doesn't work, yet
