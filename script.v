@@ -1,6 +1,6 @@
 // This is a test comment
 
-var "a" = 1
+//var "a" = 1
 
 win:
     title "script.v"

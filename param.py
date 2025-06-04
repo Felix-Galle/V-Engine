@@ -4,6 +4,7 @@ import re
 # Each tuple contains a token name and its corresponding regex pattern
 TOKEN_SPECS = [
     ('VAR',      r"var"),                # Matches the 'var' keyword (e.g., var)
+    ('COMMENT',  r"//[^\n]*"),           # Matches single-line comments (e.g., // this is a comment)
     ('NUMBER',   r"\d+(?:\.\d+)?"),      # Matches integers or floating-point numbers (e.g., 42, 3.14)
     ('STRING',   r'"[^"\n]*"'),          # Matches double-quoted strings (e.g., "hello")
     ('ID',       r"[A-Za-z_][A-Za-z0-9_]*"),  # Matches identifiers (e.g., my_var, _temp123)
@@ -11,7 +12,6 @@ TOKEN_SPECS = [
     ('SKIP',     r"[ \t]+"),             # Matches spaces and tabs (e.g., [space], [tab])
     ('OP',       r"[=+\-*/%(),]"),       # Matches operators and punctuation (e.g., =, +, -, *, /, %, (, ))
     ('COLON',    r":"),                  # Matches a colon character (e.g., :)
-
     ('LOGIC',    r"(?:&&|\|\||!|\^)"),   # Matches logical operators including XOR (e.g., &&, ||, !, ^)
     ('ARITH',    r"[+\-*/%]"),           # Matches arithmetic operators (e.g., +, -, *, /, %)
     ('COMPARE',  r"(?:==|!=|<=|>=|<|>)"), # Matches comparison operators (e.g., ==, !=, <=, >=, <, >)

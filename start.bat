@@ -5,6 +5,6 @@
 :: del /q logs\*
 
 :: python_command <mainclass> <arguements>
-python3 v_engine.py script.v --debug
+python3 v_engine.py script.v --debug --gui
 
 rd __pycache__ /s /q

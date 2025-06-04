@@ -15,11 +15,16 @@ class Lexer:
             text (str): The input text to tokenize.
         """
         self.tokens = []  # List to store the generated tokens
-        self.vars = {}  # Dictionary to store variable names and their values
+        self.vars = {}  # Dictionary to store variable names and their values e.g. {temp: 42}
         indent_stack = [0]  # Stack to track indentation levels
 
         # Process each line of the input text
+        i=0 # TODO: Remove, used for debugging
         for line in text.replace('\r', '').split('\n'):
+            
+            i = i+1 # TODO: Remove, used for debugging
+            logging.debug(f"line{i}: {line}")  # Log the current line being processed
+
             if not line.strip():  # Skip empty lines
                 continue
 
