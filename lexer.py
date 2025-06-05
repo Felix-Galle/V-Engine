@@ -1,6 +1,6 @@
 import logging
 
-from custom_token import Token , VariableToken
+from custom_token import Token, VariableToken
 import param
 
 
@@ -19,10 +19,10 @@ class Lexer:
         indent_stack = [0]  # Stack to track indentation levels
 
         # Process each line of the input text
-        i=0 # TODO: Remove, used for debugging
+        i = 0  # TODO: Remove, used for debugging
         for line in text.replace('\r', '').split('\n'):
-            
-            i = i+1 # TODO: Remove, used for debugging
+
+            i = i + 1  # TODO: Remove, used for debugging
             logging.debug(f"line{i}: {line}")  # Log the current line being processed
 
             if not line.strip():  # Skip empty lines
@@ -30,16 +30,21 @@ class Lexer:
 
             # Calculate the current line's indentation level
             indent = len(line) - len(line.lstrip(' '))
-            
+
             # Handle increased indentation (INDENT token)
             if indent > indent_stack[-1]:
                 self.tokens.append(Token('INDENT', ''))
                 indent_stack.append(indent)
-            
+
             # Handle decreased indentation (DEDENT token)
             while indent < indent_stack[-1]:
                 self.tokens.append(Token('DEDENT', ''))
                 indent_stack.pop()
+
+            # Check for variable definitions
+            if line.strip().startswith("var "):
+                self._process_variable_definition(line.strip())
+                continue
 
             # Tokenize the line using the regex patterns in `param.TOK_REGEX`
             for m in param.TOK_REGEX.finditer(line):
@@ -50,36 +55,6 @@ class Lexer:
                     continue
                 if typ == 'STRING':  # Remove quotes from string tokens
                     val = val[1:-1]
-                
-                '''
-                # Handle variable declaration
-                if typ == 'VAR':
-                    # Expect an identifier (variable name) after 'var'
-                    var_name_match = param.TOK_REGEX.match(line, m.end())
-                    if var_name_match and var_name_match.lastgroup == 'ID':
-                        var_name = var_name_match.group()
-                        # Check for '=' after the variable name
-                        eq_match = param.TOK_REGEX.match(line, var_name_match.end())
-                        if eq_match and eq_match.lastgroup == 'OP' and eq_match.group() == '=':
-                            # Get the value assigned to the variable
-                            value_match = param.TOK_REGEX.match(line, eq_match.end())
-                            if value_match:
-                                value_type = value_match.lastgroup
-                                value = value_match.group()
-                                if value_type == 'NUMBER':
-                                    value = float(value) if '.' in value else int(value)
-                                elif value_type == 'STRING':
-                                    value = value[1:-1]  # Remove quotes
-                                else:
-                                    raise SyntaxError(f"Invalid value for variable: {value}")
-                                self.tokens.append(VariableToken(var_name, value))
-                                continue
-                            else:
-                                raise SyntaxError("Expected value after '=' in variable declaration")
-                        else:
-                            raise SyntaxError("Expected '=' after variable name in variable declaration")
-                    else:
-                        raise SyntaxError("Expected variable name after 'var'")'''
 
                 # Append the token to the list
                 self.tokens.append(Token(typ, val))
@@ -96,13 +71,37 @@ class Lexer:
         self.tokens.append(Token('EOF', ''))
         self.pos = 0  # Initialize the position pointer for token traversal
 
-
         logging.debug("Lexer tokens:")
         i = 0
         for token in self.tokens:
             logging.debug(f"tok{i}: {token.type}, {token.value}")
-            i+= 1
-        logging.info("Tokenizing complete !")
+            i += 1
+        logging.info("Tokenizing complete!")
+
+    def _process_variable_definition(self, line):
+        """
+        Process a variable definition line and generate a VariableToken.
+
+        Args:
+            line (str): The line containing the variable definition.
+        """
+        parts = line.split()
+        if len(parts) < 5 or parts[0] != "var" or parts[2][0] != '"' or parts[4][0] != '"':
+            raise SyntaxError(f"Invalid variable definition: {line}")
+
+        var_type = parts[1]  # dynamic or static
+        var_name = parts[2][1:-1]  # Remove quotes from the variable name
+        var_value = parts[4][1:-1]  # Remove quotes from the variable value
+
+        if var_type not in ["dynamic", "static"]:
+            raise SyntaxError(f"Invalid variable type: {var_type}")
+
+        # Create a VariableToken and add it to the tokens list
+        variable_token = VariableToken(var_name, var_value)
+        self.tokens.append(variable_token)
+
+        # Store the variable in the vars dictionary
+        self.vars[var_name] = var_value
 
     def peek(self):
         logging.debug(f"cur tok{self.pos}:{self.tokens[self.pos].type},{self.tokens[self.pos].value}")
