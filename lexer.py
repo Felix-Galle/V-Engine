@@ -46,6 +46,15 @@ class Lexer:
                 self._process_variable_definition(line.strip())
                 continue
 
+            if line.strip().startswith("out "):
+                # Handle output statements (e.g., out "Hello, World!")
+                self.tokens.append(Token('OUT', line.strip()[4:].strip()))
+                continue
+
+            if line.strip().startswith("using "):
+                self.tokens.append(Token('USING', line.strip()[6:].strip()))
+                continue
+
             # Tokenize the line using the regex patterns in `param.TOK_REGEX`
             for m in param.TOK_REGEX.finditer(line):
                 typ = m.lastgroup  # Token type
@@ -71,7 +80,8 @@ class Lexer:
         self.tokens.append(Token('EOF', ''))
         self.pos = 0  # Initialize the position pointer for token traversal
 
-        logging.debug("Lexer tokens:")
+        # TODO: Remove debug logging
+        logging.debug(f"Lexer tokens({len(self.tokens)}):")
         i = 0
         for token in self.tokens:
             logging.debug(f"tok{i}: {token.type}, {token.value}")
@@ -86,7 +96,7 @@ class Lexer:
             line (str): The line containing the variable definition.
         """
         parts = line.split()
-        if len(parts) < 5 or parts[0] != "var" or parts[2][0] != '"' or parts[4][0] != '"':
+        if len(parts) < 5 or parts[0] != "var" or parts[2][0] != '"' '''or parts[4][0] != '"''':
             raise SyntaxError(f"Invalid variable definition: {line}")
 
         var_type = parts[1]  # dynamic or static
@@ -114,7 +124,7 @@ class Lexer:
         return self.tokens[self.pos]
 
     def next(self):
-        logging.debug(f"Nxt tok (to tok{self.pos+1}): {self.tokens[self.pos+1].type}, {self.tokens[self.pos+1].value}")
+        logging.debug(f"next tok (to tok{self.pos+1}): {self.tokens[self.pos+1].type}, {self.tokens[self.pos+1].value}")
         """
         Get the current token and advance the position.
 
@@ -125,8 +135,8 @@ class Lexer:
         self.pos += 1
         return tok
 
-    def expect(self, typ, val=None):
-        logging.debug(f"Expecting tok typ: {typ}, val: {val}")
+    def expect_next(self, typ, val=None):
+        logging.debug(f"Expect next tok (looking @ tok{self.pos+1}): {typ}, {val}")
         """
         Consume the next token and ensure it matches the expected type and value.
 
@@ -142,5 +152,5 @@ class Lexer:
         """
         tok = self.next()
         if tok.type != typ or (val is not None and tok.value != val):
-            raise SyntaxError(f"Expected {typ} {val}, got {tok}")
+            raise SyntaxError(f"Expected {typ} {val}, got {tok.strip}")
         return tok

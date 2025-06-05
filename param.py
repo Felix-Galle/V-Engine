@@ -3,7 +3,9 @@ import re
 # List of token specifications for a lexer
 # Each tuple contains a token name and its corresponding regex pattern
 TOKEN_SPECS = [
-    ('VAR',      r"var"),                # Matches the 'var' keyword (e.g., var)
+    #('VAR',      r"var"),                # Matches the 'var' keyword (e.g., var)
+    ('OUT',      r"out"),                # Matches the 'out' keyword (e.g., out)
+    ('USING',    r"using"),              # Matches the 'using' keyword (e.g., using)
     ('COMMENT',  r"//[^\n]*"),           # Matches single-line comments (e.g., // this is a comment)
     ('NUMBER',   r"\d+(?:\.\d+)?"),      # Matches integers or floating-point numbers (e.g., 42, 3.14)
     ('STRING',   r'"[^"\n]*"'),          # Matches double-quoted strings (e.g., "hello")
