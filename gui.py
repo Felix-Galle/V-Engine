@@ -22,6 +22,7 @@ class VEngineGUI(tk.Tk):
         menubar = tk.Menu(self)
         menubar.add_command(label="Open Script", command=self.open_script)
         menubar.add_command(label="Exit", command=self.quit)
+        menubar.add_command(label= "Open Log", command=lambda: os.startfile("logs\\vengine.log"))
         self.config(menu=menubar)
 
         # Script display

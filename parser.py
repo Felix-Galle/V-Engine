@@ -37,7 +37,7 @@ class Parser:
                         raise SyntaxError(f"Unexpected token {self.lex.peek().value}, expected 'win' or 'scene'")
             self.lex.next()  # Consume the current token
         if not 'gui' in using:
-            logging.warning("The whole point of this is the GUI engine.\n\t Plz use it :(")
+            logging.warning("The whole point of this is the GUI engine. Plz use it :(")
         return win, scenes
 
     def skip_comment(self):
