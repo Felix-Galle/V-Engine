@@ -1,0 +1,92 @@
+get vars working, they are successfully tokenized but it isn't used.
+get out (printing) to work. 
+These 2 problems are as a direct result of Game (class) being ill equipped:
+It cannot handle dynamic code, and variables, which unfortunately make it unsuitable for our use.
+Get the Game fixed. 
+
+I also don't understand the point of having a parser and Game. everything can be executed within parser,
+or should I create a separate file for it. I dunno :(
+
+I also don't understand the function of expect() / expect_next() .
+it just hopes that the expected thing is present. but has the exact same functionality of next()
+
+can i just remove it? In the win settings I've only used next() and there haven't been any freak 
+things happening, mainly cuz I don't type like shit (only partially true) ;)
+
+This V-Engine has spiralled out of control, it doesn't execute correctly and we're tryng to do too much :(
+This is a shambles and I hope that I haven't ruined it too much.
+
+I also need to write a list down of each individual sections are dedicated to different classes.
+for instance, I almost recoded lexer.py so it would parse statements and shit.
+So there is a lot to do.
+
+This will be fun...
+
+Oh, and I need to update the SYNTAX.md for the coding syntaxes, update CHANGES.md as it is old.
+I also need to either remove full_code.py or bring it up to date, I just dunno if I can be bothered.
+I also need to make the gui for coding the stuff look nicer as it looks like shit.
+
+One good thing is that the nex file extensions are now compatible: .v or .vng
+I changed it as .v is also the extension name of verilog files, and I need a way to differentiate.
+So .vng it is V-eNGine, it makes sense, same if you speak it out: dot V N G (nnnnnnn). So close enough.
+
+I wonder if I should put this into the changelog file?  Imagine that, some random guy comes along 
+wanting to see the latest version of the code, checks the changelog and sees some random coder
+warbling on as opposed to getting therapy lmao.
+
+I'm tired rn, I've been coding/screaming for a couple hours and I'm tired (it's gone midnight) so I 
+don't know how much more of this stuff I can take before I end up seeing god or some other stoopid deity.
+
+Lol, I've just been reading through the stuff I wrote, it started on point, folloxed by me getting lost 
+in my thoughts, I'm just surprised that I've written all this stuff down, I do'nt usually do this kind of
+shit, as I like to speak this stuff, and you'll find that often in my explanations, the sincere ones 
+anyway, not the AI generated ones lol.
+
+I know need to get back to coding, byt I've spent so long warbling shit, I cannot remember what I wanted
+to fuckin' do D:
+
+Git hub copilot's output (Question: WTH does parser, do? Lexer converts it from human code to tokens, can't 
+the stoopid code just execute with that?):
+What the Parser Does
+The Parser does not execute your game logic directly. Instead, it translates your custom script (tokens from 
+the lexer) into an Abstract Syntax Tree (AST)—in your case, objects like Win, Scene, Entity, and Statement. 
+This AST is a structured, in-memory representation of your game's configuration and logic.
+
+Lexer: Breaks text into tokens.
+Parser: Converts tokens into AST nodes (structured objects).
+Game Engine (your Game class): Reads the AST and executes the logic (creates windows, entities, runs events, etc).
+Why Use a Parser?
+Separation of Concerns: Parsing and execution are different jobs. Parsing builds a data structure; execution 
+acts on it.
+Flexibility: You can analyze, transform, or optimize the AST before running it.
+Error Checking: The parser can catch syntax errors early, before anything is executed.
+How Execution Happens
+After parsing, you get objects like Win, Scene, etc. Your Game class then interprets these objects to actually 
+run the game:
+
+The parser's job is to understand your script and turn it into something the game engine can use.
+The game engine's job is to execute the logic described by the AST.
+Analogy
+Think of the parser as a translator: it reads a recipe written in your custom language and writes it down in a 
+structured way (the AST). The game engine is the chef: it reads the structured recipe and actually cooks the meal.
+
+In summary:
+The parser is essential for turning your script into a form your game engine can execute. Without it, your engine 
+would have to deal with raw tokens or text, which is much harder and error-prone.
+
+If you want to "execute" your script, you need both:
+
+The parser to build the AST.
+The game engine to interpret and run the AST.
+Let me know if you want a concrete example of how the AST flows from parser to execution!
+
+I was wondering what the point of ast_node.py was for, it has been far too long since I've used it, or modified it.
+But now I dunno, I'm trying to add various other things that right now the stoopid Game cannot
+ execute, so do just add other stuff, ie ast nodes?
+(This is a peak example of me shitting myself due to dumb problems, which can be easily solved.)
+tbh, I might take up github on the example of AST from parser to execution.
+
+I've just realised some stuff, I know parser soo well, i understand the steps it takes and how 
+stypidly inefficient it is. but I know nothing about game.py my head draws a blank. 
+
+I have warbled for 92 lines, geez, I'm inefficient, just like this damn code ￣へ￣

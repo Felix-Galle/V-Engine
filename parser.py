@@ -1,6 +1,6 @@
 import logging
 
-from ast_node import Win, Scene, Entity, Statement
+from ast_node import *
 
 class Parser:
     def __init__(self, lexer):
@@ -101,6 +101,19 @@ class Parser:
         stmts = self.parse_block()
         return Scene(name, stmts)
 
+
+    def parse_variable(self):
+        logging.debug("Parsing variable definition")
+        tok = self.lex.peek()
+        if not hasattr(tok, 'name') or not hasattr(tok, 'value'):
+            raise SyntaxError("Invalid variable token")
+        name = tok.name
+        value = tok.value
+        self.lex.next()  # Consume the variable token
+        # You might want to store variables somewhere, or return a Statement/AST node
+        return Variable(name, value)
+
+    # In parse_block or wherever you handle statements:
     def parse_block(self):
         logging.debug("parse.Parse.parse_block()")
         logging.debug("Parsing block of statements")
@@ -114,6 +127,8 @@ class Parser:
                 self.skip_comment()
             elif tok.type == 'ID' and tok.value == 'entity':
                 statements.append(self.parse_entity())
+            elif tok.type == 'VARIABLE':  # Assuming VariableToken.type == 'VARIABLE'
+                statements.append(self.parse_variable())
             else:
                 statements.append(self.parse_statement())
         self.lex.expect_next('DEDENT')
@@ -138,11 +153,6 @@ class Parser:
                 stmts.append(self.parse_statement())
         self.lex.expect_next('DEDENT')
         return Entity(name, stmts)
-
-    def parse_variable(self):
-        logging.debug("Parsing variable definition")
-        self.lex.expect
-
 
     def parse_event(self):
         logging.debug("Parsing event definition")

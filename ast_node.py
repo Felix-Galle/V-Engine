@@ -37,3 +37,19 @@ class Statement(ASTNode):
         self.cmd = cmd
         # Arguments for the command
         self.args = args
+
+# Represents a variable in the AST
+class Variable(ASTNode):
+    def __init__(self, name, value):
+        self.name = name
+        self.value = value
+
+class Expression(ASTNode):
+    def __init__(self, left, op, right):
+        self.left = left
+        self.op = op
+        self.right = right
+
+class Output(ASTNode):
+    def __init__(self, value):
+        self.value = value
