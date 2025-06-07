@@ -47,38 +47,38 @@ to fuckin' do D:
 
 Git hub copilot's output (Question: WTH does parser, do? Lexer converts it from human code to tokens, can't 
 the stoopid code just execute with that?):
-What the Parser Does
-The Parser does not execute your game logic directly. Instead, it translates your custom script (tokens from 
-the lexer) into an Abstract Syntax Tree (AST)—in your case, objects like Win, Scene, Entity, and Statement. 
-This AST is a structured, in-memory representation of your game's configuration and logic.
+    What the Parser Does
+    The Parser does not execute your game logic directly. Instead, it translates your custom script (tokens from 
+    the lexer) into an Abstract Syntax Tree (AST)—in your case, objects like Win, Scene, Entity, and Statement. 
+    This AST is a structured, in-memory representation of your game's configuration and logic.
 
-Lexer: Breaks text into tokens.
-Parser: Converts tokens into AST nodes (structured objects).
-Game Engine (your Game class): Reads the AST and executes the logic (creates windows, entities, runs events, etc).
-Why Use a Parser?
-Separation of Concerns: Parsing and execution are different jobs. Parsing builds a data structure; execution 
-acts on it.
-Flexibility: You can analyze, transform, or optimize the AST before running it.
-Error Checking: The parser can catch syntax errors early, before anything is executed.
-How Execution Happens
-After parsing, you get objects like Win, Scene, etc. Your Game class then interprets these objects to actually 
-run the game:
+    Lexer: Breaks text into tokens.
+    Parser: Converts tokens into AST nodes (structured objects).
+    Game Engine (your Game class): Reads the AST and executes the logic (creates windows, entities, runs events, etc).
+    Why Use a Parser?
+    Separation of Concerns: Parsing and execution are different jobs. Parsing builds a data structure; execution 
+    acts on it.
+    Flexibility: You can analyze, transform, or optimize the AST before running it.
+    Error Checking: The parser can catch syntax errors early, before anything is executed.
+    How Execution Happens
+    After parsing, you get objects like Win, Scene, etc. Your Game class then interprets these objects to actually 
+    run the game:
 
-The parser's job is to understand your script and turn it into something the game engine can use.
-The game engine's job is to execute the logic described by the AST.
-Analogy
-Think of the parser as a translator: it reads a recipe written in your custom language and writes it down in a 
-structured way (the AST). The game engine is the chef: it reads the structured recipe and actually cooks the meal.
+    The parser's job is to understand your script and turn it into something the game engine can use.
+    The game engine's job is to execute the logic described by the AST.
+    Analogy
+    Think of the parser as a translator: it reads a recipe written in your custom language and writes it down in a 
+    structured way (the AST). The game engine is the chef: it reads the structured recipe and actually cooks the meal.
 
-In summary:
-The parser is essential for turning your script into a form your game engine can execute. Without it, your engine 
-would have to deal with raw tokens or text, which is much harder and error-prone.
+    In summary:
+    The parser is essential for turning your script into a form your game engine can execute. Without it, your engine 
+    would have to deal with raw tokens or text, which is much harder and error-prone.
 
-If you want to "execute" your script, you need both:
+    If you want to "execute" your script, you need both:
 
-The parser to build the AST.
-The game engine to interpret and run the AST.
-Let me know if you want a concrete example of how the AST flows from parser to execution!
+    The parser to build the AST.
+    The game engine to interpret and run the AST.
+    Let me know if you want a concrete example of how the AST flows from parser to execution!
 
 I was wondering what the point of ast_node.py was for, it has been far too long since I've used it, or modified it.
 But now I dunno, I'm trying to add various other things that right now the stoopid Game cannot

@@ -9,8 +9,10 @@ class Parser:
         self.lex = lexer
 
     def parse(self):
+        # TODO: Add comments, as they'd be rather useful duh -_-
         logging.debug("parse.Parse.parse()")
         using = []
+        instructions = [] # instructions for Game.
         win = None
         scenes = []
 
@@ -35,7 +37,16 @@ class Parser:
                         scenes.append(self.parse_scene())
                     case _:
                         raise SyntaxError(f"Unexpected token {self.lex.peek().value}, expected 'win' or 'scene'")
-            self.lex.next()  # Consume the current token
+            match self.lex.peek().type:
+                case 'VARIABLE':
+                    logging.info("Found variable declaration !")
+                    instructions.append(self.parse_variable())
+                #case 'ID':
+                #    logging.info(f"Found statement: {self.lex.peek().value}")
+                #    instructions.append(self.parse_statement())
+                case 'NEWLINE':
+                    self.lex.next()
+
         if not 'gui' in using:
             logging.warning("The whole point of this is the GUI engine. Plz use it :(")
         return win, scenes
