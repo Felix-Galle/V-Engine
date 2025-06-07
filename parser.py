@@ -9,14 +9,13 @@ class Parser:
         self.lex = lexer
 
     def parse(self):
-        # TODO: Add comments, as they'd be rather useful duh -_-
         logging.debug("parse.Parse.parse()")
         using = []
-        instructions = [] # instructions for Game.
+        instructions = []  # instructions for Game.
         win = None
         scenes = []
 
-        while self.lex.peek().type != 'EOF':
+        while self.lex.peek().type != 'EOF':  # Use peek to avoid consuming EOF prematurely
             match self.lex.peek().type:
                 case 'COMMENT':
                     logging.debug("Urgh... comments >:(")
@@ -25,13 +24,16 @@ class Parser:
                     using.append(self.lex.peek().value)
                     logging.info(f"Using {self.lex.peek().value} !")
                     self.lex.next()  # Consume the 'using' token
+                case _:
+                    logging.debug("No using statement found, continuing...")
+
 
             if 'gui' in using:
                 logging.info("Found gui declaration !")
                 match self.lex.peek().value:
                     case 'win':
                         logging.info("Found win settings declaration !")
-                        win = (self.parse_win())
+                        win = self.parse_win()
                     case 'scene':
                         logging.info("Found scene declaration !")
                         scenes.append(self.parse_scene())
@@ -41,13 +43,12 @@ class Parser:
                 case 'VARIABLE':
                     logging.info("Found variable declaration !")
                     instructions.append(self.parse_variable())
-                #case 'ID':
-                #    logging.info(f"Found statement: {self.lex.peek().value}")
-                #    instructions.append(self.parse_statement())
                 case 'NEWLINE':
                     self.lex.next()
+            if self.lex.peek().type != 'EOF':  # Ensure EOF is not consumed prematurely
+                self.lex.next()  # Consume the current token
 
-        if not 'gui' in using:
+        if 'gui' not in using:
             logging.warning("The whole point of this is the GUI engine. Plz use it :(")
         return win, scenes
 

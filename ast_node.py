@@ -40,8 +40,15 @@ class Statement(ASTNode):
 
 # Represents a variable in the AST
 class Variable(ASTNode):
-    def __init__(self, name, value):
+    """
+    requires varaibel name, whther it's dynamic or static, 
+    the data type e.g. String, and the value.
+    """
+
+    def __init__(self, name, type, data_type, value):
         self.name = name
+        self.type = type
+        self.data_type = data_type
         self.value = value
 
 class Expression(ASTNode):

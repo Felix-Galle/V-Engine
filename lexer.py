@@ -55,6 +55,11 @@ class Lexer:
                 self.tokens.append(Token('USING', line.strip()[6:].strip()))
                 continue
 
+            if line.strip().startswith("stop"):
+                # Handle stop statements (e.g., stop)
+                self.tokens.append(Token('STOP', ''))
+                continue
+
             # Tokenize the line using the regex patterns in `param.TOK_REGEX`
             for m in param.TOK_REGEX.finditer(line):
                 typ = m.lastgroup  # Token type
@@ -96,18 +101,18 @@ class Lexer:
             line (str): The line containing the variable definition.
         """
         parts = line.split()
-        if len(parts) < 5 or parts[0] != "var" or parts[2][0] != '"' '''or parts[4][0] != '"''':
+        if len(parts) < 5 or parts[0] != "var" or parts[2][0] not in ['"', "'"] or parts[4][0] not in ['"', "'"]:
             raise SyntaxError(f"Invalid variable definition: {line}")
 
         var_type = parts[1]  # dynamic or static
         var_name = parts[2][1:-1]  # Remove quotes from the variable name
-        var_value = parts[4][1:-1]  # Remove quotes from the variable value
+        var_value = parts[4][1:-1]  # Remove quotes from the variable value 
 
         if var_type not in ["dynamic", "static"]:
             raise SyntaxError(f"Invalid variable type: {var_type}")
 
         # Create a VariableToken and add it to the tokens list
-        variable_token = VariableToken(var_name, var_value)
+        variable_token = VariableToken(var_name, var_type, var_value)
         self.tokens.append(variable_token)
 
         # Store the variable in the vars dictionary
