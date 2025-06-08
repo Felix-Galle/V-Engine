@@ -1,6 +1,7 @@
 
-// Test comment
+// Test comment // out "After Test Comment"
+# Other Test comment
 
-var dynamic "test_var" == "test_value"
+var dynamic "test_var" = "test_value"
 
 out "Hello World

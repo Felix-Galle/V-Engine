@@ -9,7 +9,6 @@ class Parser:
         self.lex = lexer
 
     def parse(self):
-        logging.debug("parse.Parse.parse()")
         using = []
         instructions = []  # instructions for Game.
         win = None
@@ -53,14 +52,12 @@ class Parser:
         return win, scenes
 
     def skip_comment(self):
-        logging.debug("parse.Parse.skip_comment()")
         while self.lex.peek().type != 'NEWLINE' and self.lex.peek().type != 'EOF':
             self.lex.next()
         if self.lex.peek().type == 'NEWLINE':
             self.lex.next()
 
     def parse_win(self):
-        logging.debug("parse.Parse.parse_win()")
         """
         win:
             title "My Game"
@@ -100,7 +97,6 @@ class Parser:
 
 
     def parse_scene(self):
-        logging.debug("parse.Parse.parse_scene()")
         """
         scene "name01":
             # blah
@@ -115,7 +111,6 @@ class Parser:
 
 
     def parse_variable(self):
-        logging.debug("Parsing variable definition")
         tok = self.lex.peek()
         if not hasattr(tok, 'name') or not hasattr(tok, 'value'):
             raise SyntaxError("Invalid variable token")
@@ -201,6 +196,3 @@ class Parser:
         if self.lex.peek().type == 'NEWLINE':
             self.lex.next()
         return Statement(cmd, args)
-    
-
-    

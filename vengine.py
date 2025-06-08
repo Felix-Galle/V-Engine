@@ -31,14 +31,19 @@ class VEngine:
         log_dir = './logs'
         os.makedirs(log_dir, exist_ok=True)
         log_file = os.path.join(log_dir, f'vengine.log')
-        logging.basicConfig(filename=log_file, level=logging.INFO, format='[%(name)s/%(levelname)s] %(asctime)s > %(message)s')
-        logging.info("V-Engine starting...")
+        logging.basicConfig(
+            filename=log_file,
+            level=logging.INFO,
+            format='[%(module)s.%(funcName)s/%(levelname)s] %(asctime)s > %(message)s'
+            #format='[%(module)s/%(levelname)s] %(asctime)s > %(message)s'
+        )
+        logging.info("V-Engine logging started")
 
     def parse_args(self):
         self.gui = False
         logging.info("Checking args...")
         for arg in self.argv:
-            logging.debug(f"arg: {arg}")
+            logging.info(f"arg: {arg}") # TODO: Remove, just for Testing.
             if arg.endswith('.vng') or arg.endswith('.v'):
                 self.script_file = arg
                 if arg.endswith('.v'):
@@ -52,7 +57,7 @@ class VEngine:
                     os.system("notepad.exe " + self.script_file)
                 else:
                     print("No script file to open.")
-            if arg == '--debug':
+            if arg == '--debug' or arg == '--verbose':
                 logging.getLogger().setLevel(logging.DEBUG)
                 logging.debug("Debug mode enabled")
             if arg == '+gui' or arg == '--gui':
@@ -89,8 +94,9 @@ class VEngine:
         print("Usage: vengine.py <script.v>")
         print("Options:")
         print("  --help       Show this help message and exit")
-        print("  --open       Open the script file in Notepad (nonoperational, yet)")
+        print("  --open       Open the script file in Notepad (nonoperational, yet -_- )")
         print("  --debug      Enable debug mode")
+        print("  --verbose    Enable debug lmode (alias for --debug)")
         print("  +gui         Run the script with GUI")
         print("  --gui        Run the script with GUI (alias for +gui)")
 

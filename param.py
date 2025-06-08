@@ -3,11 +3,10 @@ import re
 # List of token specifications for a lexer
 # Each tuple contains a token name and its corresponding regex pattern
 TOKEN_SPECS = [
-    #('VAR',      r"var"),                # Matches the 'var' keyword (e.g., var)
-    ('VAR',      r"var\s+(?P<name>[A-Za-z_][A-Za-z0-9_]*)\s+(?P<type>dynamic|static)(?:\s*=\s*(?P<value>[^;\n]+))?;"),  # Matches variable definitions (e.g., var myVar dynamic = 42;)
+    ('VAR',      r"var\s+(?P<type>dynamic|static)\s+(?P<name>[A-Za-z_][A-Za-z0-9_]*)\s*=\s*(?P<value>[^\n]+)"),  # Matches variable definitions (e.g., var dynamic myVar = "test_value")
     ('OUT',      r"out"),                   # Matches the 'out' keyword (e.g., out)
     ('USING',    r"using"),                 # Matches the 'using' keyword (e.g., using)
-    ('COMMENT',  r"(//[^\n]*|#[^\n]*)"),    # Matches single-line comments (e.g., // this is a comment)
+    ('COMMENT',  r"(//[^//]*|#[^\n]*)"),    # Matches single-line comments (e.g., // this is a comment)
     ('NUMBER',   r"\d+(?:\.\d+)?"),         # Matches integers or floating-point numbers (e.g., 42, 3.14)
     ('STRING',   r'"[^"\n]*"'),             # Matches double-quoted strings (e.g., "hello")
     ('ID',       r"[A-Za-z_][A-Za-z0-9_]*"),# Matches identifiers (e.g., my_var, _temp123)

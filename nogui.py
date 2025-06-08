@@ -13,7 +13,6 @@ class VEngineNoGUI:
 
         # Running the script without GUI
         try:
-            
             text = open(script_file).read()
             win, scenes = Parser(Lexer(text)).parse() # Parses scenes and win
             Game(win, scenes).run(scenes[0].name)

@@ -8,10 +8,21 @@ from parser import Parser
 from game import Game
 from io import StringIO
 
+class TextWidgetHandler(logging.Handler):
+    def __init__(self, text_widget):
+        super().__init__()
+        self.text_widget = text_widget
+
+    def emit(self, record):
+        log_entry = self.format(record)
+        self.text_widget.config(state='normal')
+        self.text_widget.insert(tk.END, f"{log_entry}\n")
+        self.text_widget.config(state='disabled')
+
 class VEngineGUI(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("V-Engine GUI")
+        self.title("V-Engine")
         self.geometry("800x600")
         self.script_file = None
 
@@ -22,7 +33,10 @@ class VEngineGUI(tk.Tk):
         menubar = tk.Menu(self)
         menubar.add_command(label="Open Script", command=self.open_script)
         menubar.add_command(label="Exit", command=self.quit)
+        # TODO: Remove, vengine.log will break if the logs folder does not exist.
         menubar.add_command(label= "Open Log", command=lambda: os.startfile("logs\\vengine.log"))
+        menubar.add_command(label= "Debug Mode", command=lambda: logging.getLogger().setLevel(logging.DEBUG))
+
         self.config(menu=menubar)
 
         # Script display
@@ -38,7 +52,7 @@ class VEngineGUI(tk.Tk):
         self.output_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
     def open_script(self):
-        file_path = filedialog.askopenfilename(filetypes=[("V Scripts", "*.v")])
+        file_path = filedialog.askopenfilename(filetypes=[("V Scripts", "*.v"), ("V Scripts", "*.vng")])
         if file_path:
             self.script_file = file_path
             with open(file_path, 'r', encoding='utf-8') as f:
