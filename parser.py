@@ -4,13 +4,14 @@ from ast_node import *
 
 class Parser:
     def __init__(self, lexer):
-        logging.debug(f"Using Lexer: {lexer}") # TODO: Remove, there is no use to knowing the lexer memory address
+        logging.debug(f"Using Lexer: {lexer}") # TODO: Remove, there is no use to knowing the lexer's location
         logging.info(f"Parsing...")
         self.lex = lexer
 
     def parse(self):
-        using = []
+        using = [] # For use internally, to check if certain features are used.
         instructions = []  # instructions for Game.
+        logging.info("Parsing instructions...")
         win = None
         scenes = []
 
@@ -49,7 +50,8 @@ class Parser:
 
         if 'gui' not in using:
             logging.warning("The whole point of this is the GUI engine. Plz use it :(")
-        return win, scenes
+
+        return instructions, using
 
     def skip_comment(self):
         while self.lex.peek().type != 'NEWLINE' and self.lex.peek().type != 'EOF':

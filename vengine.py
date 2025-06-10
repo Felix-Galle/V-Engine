@@ -75,7 +75,7 @@ class VEngine:
         logging.info("Created by: %s", "thatfacelessone & Felix-Galle")
         logging.info("Python executable: %s", sys.executable)
         logging.info("Python version: %s", getattr(sys, 'winver', platform.python_version()))
-        logging.info(f"Operating system: {platform.system()}")
+        logging.info(f"Operating system: {platform.system()} {platform.release()} {platform.version()}")
         logging.info("Current working directory: %s", os.getcwd())
         try:
             user = os.getlogin()
