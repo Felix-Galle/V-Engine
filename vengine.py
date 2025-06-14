@@ -64,6 +64,16 @@ class VEngine:
                 logging.info("GUI mode enabled")
                 self.gui = True
 
+    def env_info(self):
+        '''
+        Print environment information for debugging purposes.
+        '''
+        logging.info("Created by: %s", "thatfacelessone & Felix-Galle")
+        logging.info("Python executable: %s", sys.executable)
+        logging.info("Python version: %s", getattr(sys, 'winver', platform.python_version()))
+        logging.info(f"Operating system: {platform.system()} {platform.release()} {platform.version()}")
+        logging.info("Current working directory: %s", os.getcwd())
+
     def run(self):
         '''
         if not self.script_file and not self.gui:
@@ -72,11 +82,7 @@ class VEngine:
             self.helpme()
             sys.exit(1)'''
 
-        logging.info("Created by: %s", "thatfacelessone & Felix-Galle")
-        logging.info("Python executable: %s", sys.executable)
-        logging.info("Python version: %s", getattr(sys, 'winver', platform.python_version()))
-        logging.info(f"Operating system: {platform.system()} {platform.release()} {platform.version()}")
-        logging.info("Current working directory: %s", os.getcwd())
+        
         try:
             user = os.getlogin()
         except Exception:

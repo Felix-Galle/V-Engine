@@ -67,8 +67,9 @@ class Lexer:
 
                 if typ == 'SKIP':  # Skip tokens (e.g., whitespace)
                     continue
-                if typ == 'STRING':  # Remove quotes from string tokens
+                if typ == 'STRING' or 'LOG' or 'OUT':  # Remove quotes from string tokens
                     val = val[1:-1]
+
 
                 # Append the token to the list
                 self.tokens.append(Token(typ, val))

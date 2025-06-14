@@ -43,6 +43,7 @@ class Parser:
                 case 'VARIABLE':
                     logging.info("Found variable declaration !")
                     instructions.append(self.parse_variable())
+
                 case 'NEWLINE':
                     self.lex.next()
             if self.lex.peek().type != 'EOF':  # Ensure EOF is not consumed prematurely
@@ -122,7 +123,7 @@ class Parser:
         # You might want to store variables somewhere, or return a Statement/AST node
         return Variable(name, value)
 
-    # In parse_block or wherever you handle statements:
+    # In parse_block or wherever handle statements:
     def parse_block(self):
         logging.debug("parse.Parse.parse_block()")
         logging.debug("Parsing block of statements")

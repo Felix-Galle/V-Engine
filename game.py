@@ -8,9 +8,10 @@ from entity_inst import EntityInst
 from ast_node import Win, Scene, Entity, Statement
 
 class Game:
-    def __init__(self, instructions):
+    def __init__(self, instructions, using):
         # Initialize the Game object with instructions
-        logging.debug("Using Game constructor")
+        logging.info("Game starting...")
+        logging.info(f"Using modules: {', '.join(using)}")
         logging.debug(f"Creating Game with instructions: {instructions}")
         self.instructions = instructions
         self.win = None  # Window configuration
