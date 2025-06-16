@@ -8,14 +8,10 @@ from game import Game
   
 
 class VEngineNoGUI:
-    def __init__(self, script_file=None):
-        self.script_file = script_file
+    def __init__(self, script_path):
+        self.script_path = script_path
 
         # Running the script without GUI
-        try:
-            text = open(script_file).read()
-            win, scenes = Parser(Lexer(text)).parse() # Parses scenes and win
-            Game(win, scenes).run(scenes[0].name)
-        except Exception as e:
-            logging.error("An error occurred: %s", e)
-            sys.exit(1)
+        text = open(script_path).read()
+        instructions = Parser(Lexer(text)).parse() # Parses scenes and win
+        Game(instructions)

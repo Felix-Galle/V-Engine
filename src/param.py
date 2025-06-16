@@ -4,10 +4,10 @@ import re
 # Each tuple contains a token name and its corresponding regex pattern
 TOKEN_SPECS = [
     ('VAR',      r"var\s+(?P<type>dynamic|static)\s+(?P<name>[A-Za-z_][A-Za-z0-9_]*)\s*=\s*(?P<value>[^\n]+)"),  # Matches variable definitions (e.g., var dynamic myVar = "test_value")
-    ('LOG',r'log\s+"[^"\n]*"\s*'),          # Matches log statements (e.g., log "This is a log message")
-    ('OUT',      r"out"),                   # Matches the 'out' keyword (e.g., out)
+    ('LOG',      r'log\s+"[^"\n]*"\s*'),    # Matches log statements (e.g., log "This is a log message")
+    ('OUT',      r'out\s+"[^"\n]*"\s*'),    # Matches out statements (e.g., out "This is some out statement")
     ('USING',    r"using"),                 # Matches the 'using' keyword (e.g., using)
-    ('COMMENT',  r"(//[^//]*|#[^\n]*)"),    # Matches single-line comments (e.g., // this is a comment)
+    ('COMMENT',  r"(#.*|//.*(?:\n[ \t]*//.*)*)"),    # Matches single-line (#) and multi-line (// ... //) comments
     ('NUMBER',   r"\d+(?:\.\d+)?"),         # Matches integers or floating-point numbers (e.g., 42, 3.14)
     ('STRING',   r'"[^"\n]*"'),             # Matches double-quoted strings (e.g., "hello")
     ('ID',       r"[A-Za-z_][A-Za-z0-9_]*"),# Matches identifiers (e.g., my_var, _temp123)

@@ -22,11 +22,11 @@ class Lexer:
         i = 0  # TODO: Remove, used for debugging
         for line in text.replace('\r', '').split('\n'):
 
-            i = i + 1  # TODO: Remove, used for debugging
-            logging.debug(f"line{i}: {line}")  # Log the current line being processed
-
             if not line.strip():  # Skip empty lines
                 continue
+
+            i = i + 1  # TODO: Remove, used for debugging
+            logging.debug(f"line{i}: {line}")  # Log the current line being processed
 
             # Calculate the current line's indentation level
             indent = len(line) - len(line.lstrip(' '))
