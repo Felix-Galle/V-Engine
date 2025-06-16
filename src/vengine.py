@@ -36,13 +36,17 @@ class VEngine:
         """
         Search for the script file in the project directory and its subfolders.
         Warn if found in an inappropriate folder.
+        Suggest alternative file if similar file is found.
+        Suggest alternative file if found with a different extension (.v vs .vng).
         Returns the absolute path if found, else None.
         """
         project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-        inappropriate_folders = ['.github', 'logs', 'src','.git','__pycache__'] 
-        # the list could be endless, cuz user stoopid ¯\_(ツ)_/¯
+        inappropriate_folders = ['.github', 'logs', 'src', '.git', '__pycache__']
+
+        alternative_file = None
 
         for root, dirs, files in os.walk(project_root):
+            # Check for both .v and .vng extensions
             if self.script_file in files:
                 script_path = os.path.join(root, self.script_file)
                 # Check if in an inappropriate folder
@@ -51,11 +55,29 @@ class VEngine:
                 if any(part in inappropriate_folders for part in parts):
                     logging.warning(f"Script file '{self.script_file}' found in inappropriate folder: {root}")
                 break
+            else:
+                # Check for alternative file with the other extension
+                base_name, ext = os.path.splitext(self.script_file)
+                if ext == '.v' and f"{base_name}.vng" in files:
+                    alternative_file = os.path.join(root, f"{base_name}.vng")
+                elif ext == '.vng' and f"{base_name}.v" in files:
+                    alternative_file = os.path.join(root, f"{base_name}.v")
 
         if not script_path:
             logging.error(f"Script file '{self.script_file}' not found in project directory.")
+            if alternative_file:
+                logging.warning(f"Alternative file found '{alternative_file}'?")
 
-        logging.info(f"Script Path: {script_path}")
+                # Brain fart, couldn't remember how to get user input in a script. （￣へ￣）
+                print(f"Did you mean '{alternative_file}'? (y/n)")
+                input_choice = input("Do you want to use this file? (y/n): ").strip().lower()
+                if input_choice == 'y':
+                    script_path = alternative_file
+                    logging.info(f"Using alternative script file: {script_path}")
+                else:
+                    sys.exit(1)
+
+        logging.debug(f"Script Path: {script_path}")
         return script_path
 
     def setup_logging(self):
@@ -76,9 +98,6 @@ class VEngine:
             logging.info(f"arg: {arg}") # TODO: Remove, just for Testing.
             if arg.endswith('.vng') or arg.endswith('.v'):
                 self.script_file = arg
-                if arg.endswith('.v'):
-                    logging.warning("Script using .v file extension, consider using .vng for better compatibility.\n\tThis is due " \
-                    "to file extension maybe being mixed up with verilog files. ")
             if arg == '--help':
                 self.helpme()
                 sys.exit(0)
