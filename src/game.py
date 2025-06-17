@@ -34,6 +34,9 @@ class Game:
                 # If the instruction is a scene definition, add it to the scenes dictionary
                 self.scenes[instruction.name] = instruction
                 logging.debug(f"Scene added: {instruction.name}")
+            else:
+                # If the instruction is a normal statement, add to thing
+                continue # TODO: Remove, before I implement anything
 
     def setup_scene(self, name):
         # Set up the specified scene
