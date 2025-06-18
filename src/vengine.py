@@ -41,7 +41,7 @@ class VEngine:
         Returns the absolute path if found, else None.
         """
         project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-        inappropriate_folders = ['.github', 'logs', 'src', '.git', '__pycache__']
+        inappropriate_folders = ['.github', 'logs', 'src', '.git', '__pycache__','.git']
 
         alternative_file = None
 

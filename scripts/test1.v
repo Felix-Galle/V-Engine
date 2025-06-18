@@ -8,4 +8,4 @@ log "Test log"
 
 var dynamic "test_var" = "test_value"
 
-out "Hello World
+out "Hello World"

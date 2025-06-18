@@ -8,11 +8,12 @@ from entity_inst import EntityInst
 from ast_node import Win, Scene, Entity, Statement
 
 class Game:
-    def __init__(self, instructions, using):
+    def __init__(self, instructions, using=["None"]):
         # Initialize the Game object with instructions
         logging.info("Game starting...")
-        logging.info(f"Using modules: {', '.join(using)}")
+        logging.info(f"Using modules: {using}")
         logging.debug(f"Creating Game with instructions: {instructions}")
+        self.using = using
         self.instructions = instructions
         self.win = None  # Window configuration
         self.scenes = {}  # Dictionary to store scenes

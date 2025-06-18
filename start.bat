@@ -9,7 +9,7 @@
 
 cd src
 
-python3 vengine.py test.vng --debug
+python3 vengine.py test1.v --debug
 
 rd __pycache__ /s /q
 

@@ -19,7 +19,7 @@ class Parser:
             match self.lex.peek().type:
                 case 'COMMENT':
                     logging.debug("Urgh... comments >:(")
-                    self.skip_comment()
+                    self.skip_comment() # or put to continue,
                 case 'USING':
                     using.append(self.lex.peek().value)
                     logging.info(f"Using {self.lex.peek().value} !")

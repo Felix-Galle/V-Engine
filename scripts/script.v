@@ -2,6 +2,8 @@
 
 //var "a" = 1
 
+using gui
+
 win:
     title "script.v"
     dimensions 400 300
