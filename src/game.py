@@ -11,7 +11,7 @@ class Game:
     def __init__(self, instructions, using=["None"]):
         # Initialize the Game object with instructions
         logging.info("Game starting...")
-        logging.info(f"Using modules: {using}")
+        logging.info(f"Using modules: {using.split}")
         logging.debug(f"Creating Game with instructions: {instructions}")
         self.using = using
         self.instructions = instructions

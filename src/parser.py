@@ -25,7 +25,7 @@ class Parser:
                     logging.info(f"Using {self.lex.peek().value} !")
                     self.lex.next()  # Consume the 'using' token
                 case _:
-                    logging.debug("No using statement found, continuing...")
+                    logging.debug("No module import found, continuing...")
 
 
             if 'gui' in using:
