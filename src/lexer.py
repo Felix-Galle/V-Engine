@@ -60,7 +60,7 @@ class Lexer:
                 self.tokens.append(Token('STOP', ''))
                 continue
             if "ooga booga" in line.strip():
-                logging.info("Ooga booga to u too !")
+                logging.info("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOGA BOOGA")
                 continue
 
             # Tokenize the line using the regex patterns in `param.TOK_REGEX`
